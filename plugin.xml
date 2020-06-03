@@ -19,6 +19,6 @@
             </feature>
         </config-file>
         <config-file parent="/*" target="AndroidManifest.xml"></config-file>
-        <source-file src="src/android/CookiesPlugin.java" target-dir="src/cordova/plugins/cookies/CookiesPlugin" />
+        <source-file src="src/android/CookiesPlugin.java" target-dir="src/cordova/plugins/cookies/" />
     </platform>
 </plugin>
