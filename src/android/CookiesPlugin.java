@@ -7,9 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * This class echoes a string called from JavaScript.
- */
+import android.webkit.CookieManager;
+
 public class CookiesPlugin extends CordovaPlugin {
 
     @Override
@@ -23,7 +22,7 @@ public class CookiesPlugin extends CordovaPlugin {
 
     private void getCookie(JSONArray args, CallbackContext callbackContext) {
         // get url argument
-        String url = args.getString(0);
+        String url = args.optString(0);
 
         // check url argument
         if (url == null || url.length() == 0) {
@@ -32,6 +31,16 @@ public class CookiesPlugin extends CordovaPlugin {
         }
 
         // get cookies
-        callbackContext.success(url);
+        cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+                try {
+                    // return cookie value
+                    callbackContext.success(CookieManager.getInstance().getCookie(url));
+                } catch (Exception e) {
+                    // return error
+                    callbackContext.error(e.getMessage());
+                }
+            }
+        });
     }
 }
