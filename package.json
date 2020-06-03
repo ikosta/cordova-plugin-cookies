@@ -1,0 +1,27 @@
+{
+  "name": "cordova-plugin-cookies",
+  "version": "0.0.1",
+  "description": "Cordova Cookies Plugin",
+  "cordova": {
+    "id": "cordova-plugin-cookies",
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ikosta/cordova-plugin-cookies.git"
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-ios",
+    "cordova-android"
+  ],
+  "author": "Konstantinos Tsanakas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ikosta/cordova-plugin-cookies/issues"
+  },
+  "homepage": "https://github.com/ikosta/cordova-plugin-cookies#readme"
+}
