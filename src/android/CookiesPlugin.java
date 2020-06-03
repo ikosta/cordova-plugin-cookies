@@ -1,4 +1,4 @@
-package cordova-plugin-cookies;
+package cordova.plugins.cookies;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;

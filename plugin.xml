@@ -15,10 +15,10 @@
     <platform name="android">
         <config-file parent="/*" target="res/xml/config.xml">
             <feature name="CookiesPlugin">
-                <param name="android-package" value="cordova-plugin-cookies.CookiesPlugin" />
+                <param name="android-package" value="cordova.plugins.cookies.CookiesPlugin" />
             </feature>
         </config-file>
         <config-file parent="/*" target="AndroidManifest.xml"></config-file>
-        <source-file src="src/android/CookiesPlugin.java" target-dir="src/cordova-plugin-cookies/CookiesPlugin" />
+        <source-file src="src/android/CookiesPlugin.java" target-dir="src/cordova/plugins/cookies/CookiesPlugin" />
     </platform>
 </plugin>
