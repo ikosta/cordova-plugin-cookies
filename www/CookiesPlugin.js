@@ -1,5 +1,12 @@
-var exec = require('cordova/exec');
+var exec = require("cordova/exec");
 
-exports.coolMethod = function (arg0, success, error) {
-    exec(success, error, 'CookiesPlugin', 'coolMethod', [arg0]);
+exports.getCookie = function (url, success, error) {
+  // check url argument
+  if (!url) {
+    error("URL missing.");
+    return;
+  }
+
+  // execute cordova
+  exec(success, error, "CookiesPlugin", "getCookie", [url]);
 };

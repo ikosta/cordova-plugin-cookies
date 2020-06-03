@@ -1,34 +1,48 @@
 /********* CookiesPlugin.m Cordova Plugin Implementation *******/
 
 #import <Cordova/CDV.h>
+#import <WebKit/WKHTTPCookieStore.h>
+#import <WebKit/WKWebsiteDataStore.h>
 
 @interface CookiesPlugin : CDVPlugin {
   // Member variables go here.
 }
 
-- (void)coolMethod:(CDVInvokedUrlCommand*)command;
+- (void)getCookie:(CDVInvokedUrlCommand*)command;
 @end
 
 @implementation CookiesPlugin
 
-- (void)coolMethod:(CDVInvokedUrlCommand*)command
+- (void)getCookie:(CDVInvokedUrlCommand*)command
 {
-    CDVPluginResult* pluginResult = nil;
-    NSString* echo = [command.arguments objectAtIndex:0];
+    // get url argument
+    NSString* url = [command.arguments objectAtIndex:0];
 
-    if (echo != nil && [echo length] > 0) {
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:echo];
-    } else {
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+    // check url argument
+    if (url == nil || [url length] == 0) {
+        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"URL missing."] callbackId:command.callbackId];
+        return;
     }
 
+    // get cookies
     WKHTTPCookieStore* cookies = [WKWebsiteDataStore defaultDataStore].httpCookieStore;
-    
-    [cookies getAllCookies:^(NSArray<NSHTTPCookie *> * _Nonnull allCookies) {
-        allCookies.count;
-    }];
 
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    [cookies getAllCookies:^(NSArray<NSHTTPCookie *> * _Nonnull allCookies) {
+        // create cookie value
+        NSString* cookieValue = @"";
+
+        // iterate all cookies
+        for (NSHTTPCookie *cookie in allCookies) {
+            // check url with domain
+            if ([url rangeOfString:cookie.domain].location != NSNotFound) {
+                // append cookie to cookie value
+                cookieValue = [[NSString alloc] initWithFormat:@"%@%@=%@;", cookieValue, cookie.name, cookie.value];
+            }
+        }
+
+        // return cookie value
+        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:cookieValue] callbackId:command.callbackId];
+    }];
 }
 
 @end
