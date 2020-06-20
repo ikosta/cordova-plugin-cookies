@@ -57,7 +57,7 @@ iab.on("loadstop").subscribe(() => {
     async (cookies: string) => {
       // set cookies to http plugin
       cookies.split(";").forEach((cookie) => {
-        this.http.setCookie(sapSettings.url, cookie);
+        this.http.setCookie(url, cookie);
       });
 
       // check if connected
