@@ -43,7 +43,7 @@ window.cordova.plugins.CookiesPlugin.getCookie(url, (cookies) => {
 
 - Ionic v5 with Angular
 - [@ionic-native/in-app-browser](https://ionicframework.com/docs/native/in-app-browser)
-- [@ionic-native/http](https://ionicframework.com/docs/native/http).
+- [@ionic-native/http](https://ionicframework.com/docs/native/http)
 
 ```ts
 // create in app browser
